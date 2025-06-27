@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Gradient College Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    /* Reset + Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ece9e6, #ffffff);
+      scroll-behavior: smooth;
+      color: #333;
+    }
+
+    /* Navbar */
+    nav {
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: white;
+      padding: 1em 2em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5em;
+    }
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .nav-links a:hover {
+      color: #ffd700;
+      transform: scale(1.1);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: url("https://source.unsplash.com/1600x800/?college,campus") no-repeat center center/cover;
+      height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      position: relative;
+      animation: fadeIn 2s ease-in;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-content h1 {
+      font-size: 3.5em;
+      animation: slideDown 1.5s ease-in-out;
+    }
+    .hero-content p {
+      font-size: 1.3em;
+      margin-top: 0.5em;
+    }
+
+    /* Cards Section */
+    .cards-section {
+      padding: 4em 2em;
+      text-align: center;
+      background: linear-gradient(to right, #f9f9f9, #e0f7fa);
+    }
+    .cards-section h2 {
+      font-size: 2.5em;
+      margin-bottom: 1em;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2em;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      width: 300px;
+      padding: 1.5em;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      perspective: 1000px;
+    }
+    .card img {
+      width: 100%;
+      border-radius: 15px;
+    }
+    .card:hover {
+      transform: rotateY(5deg) scale(1.05);
+      box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+    }
+
+    /* About */
+    .about-section {
+      padding: 4em 2em;
+      background: linear-gradient(to right, #ffeaa7, #fab1a0);
+      text-align: center;
+    }
+    .about-section h2 {
+      font-size: 2.5em;
+      margin-bottom: 1em;
+    }
+
+    /* Contact */
+    .contact-section {
+      padding: 4em 2em;
+      background: #2d3436;
+      color: white;
+      text-align: center;
+    }
+    .contact-section h2 {
+      font-size: 2.5em;
+      margin-bottom: 1em;
+    }
+
+    /* Footer */
+    footer {
+      background: #000;
+      color: white;
+      text-align: center;
+      padding: 1em 0;
+    }
+
+    /* Animations */
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .card-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .nav-links {
+        flex-direction: column;
+        gap: 0.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">🌟 MyCollege</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#departments">Departments</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Welcome to MyCollege</h1>
+      <p>Your Journey Starts Here 🎓</p>
+    </div>
+  </section>
+
+  <section id="departments" class="cards-section">
+    <h2>Our Departments</h2>
+    <div class="card-container">
+      <div class="card">
+        <img src="https://source.unsplash.com/300x200/?computer" alt="CSE">
+        <h3>Computer Science</h3>
+        <p>Build your tech future with programming, AI, and innovation.</p>
+      </div>
+      <div class="card">
+        <img src="https://source.unsplash.com/300x200/?mechanical" alt="Mech">
+        <h3>Mechanical Engineering</h3>
+        <p>Explore machines, design, and advanced manufacturing.</p>
+      </div>
+      <div class="card">
+        <img src="https://source.unsplash.com/300x200/?electronics" alt="ECE">
+        <h3>Electronics</h3>
+        <p>Discover circuits, embedded systems, and communication tech.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="about-section">
+    <h2>About Us</h2>
+    <p>MyCollege is a premier institution focused on excellence in education, innovation, and research. Our mission is to empower students with knowledge, skills, and confidence.</p>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <h2>Contact Us</h2>
+    <p>Email: info@mycollege.edu<br>Phone: +91 98765 43210<br>Address: 123 College Road, Chennai, India</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 MyCollege. Designed with ❤️ by Jagathish</p>
+  </footer>
+
+</body>
+</html>
