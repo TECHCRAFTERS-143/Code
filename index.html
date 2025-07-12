@@ -106,6 +106,33 @@
     }
 
     audio { display: none; }
+
+    /* 🌐 Mobile Responsive Styles */
+    @media only screen and (max-width: 600px) {
+      .content {
+        padding: 15px;
+        transform: translateY(-45%);
+      }
+
+      .content h1 {
+        font-size: 2.3rem;
+      }
+
+      .reveal-btn {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+      }
+
+      .message-box {
+        padding: 15px;
+        width: 90%;
+      }
+
+      .secret-message p {
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+    }
   </style>
 </head>
 <body>
@@ -121,10 +148,10 @@
       <div class="message-box">
         <p>HAPPY BIRTHDAY HARINI …</p>
         <p>My dear best friend... 🫶</p>
-        <p>Thank you for being a light in my life. you're irreplaceble and no one can ever fill place. 💖</p>
-        <p> I broke your trust and i regret it deeply i'm sorry</p>
-        <p>For being you for the laughs. for the memories. for the  friendship i'll always be gere -- your forver friend</p>
-        <p>here's to a day as love and fabulous as you are.. stay blessing...happy birthday..</p>
+        <p>Thank you for being a light in my life. You're irreplaceable and no one can ever fill your place. 💖</p>
+        <p>I broke your trust and I regret it deeply. I'm truly sorry.</p>
+        <p>For being you, for the laughs, for the memories, for the friendship — I'll always be here — your forever friend.</p>
+        <p>Here's to a day as loved and fabulous as you are. Stay blessed... Happy Birthday! 🎉</p>
       </div>
     </div>
   </div>
@@ -134,7 +161,7 @@
     function createHeart() {
       const heart = document.createElement('div');
       heart.className = 'heart';
-      heart.innerText = '🎂   ♥️  🍫';
+      heart.innerText = '💗';
       heart.style.left = Math.random() * 100 + 'vw';
       heart.style.animationDuration = (Math.random() * 2 + 4) + 's';
       document.body.appendChild(heart);
