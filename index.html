@@ -1,192 +1,306 @@
-<!DOCTYPE html><html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rage Runner: The Praying Gamer</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background: #000;
-      font-family: 'Arial', sans-serif;
-    }canvas {
-  background: #111;
-  display: block;
-  margin: 0 auto;
-}
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Jagathish Portfolio CV</title>  
+  <style>  
+    body {  
+      margin: 0;  
+      font-family: 'Poppins', sans-serif;  
+      background: linear-gradient(135deg, #f9f9f9, #ffffff);  
+      scroll-behavior: smooth;  
+    }  
 
-#message {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: red;
-  font-size: 2rem;
-  font-weight: bold;
-  display: none;
-  text-align: center;
-}
+    /* Header */  
+    header {  
+      display: flex;  
+      justify-content: space-between;  
+      align-items: center;  
+      padding: 15px 25px;  
+      background: #0d1b2a;  
+      color: white;  
+      position: sticky;  
+      top: 0;  
+      z-index: 1000;  
+    }  
 
-#scoreBoard {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
-  background: rgba(0,0,0,0.5);
-  padding: 10px 20px;
-  border-radius: 10px;
-}
+    header h1 {  
+      margin: 0;  
+      font-size: 20px;  
+    }  
+    header h1 span {  
+      font-size: 14px;  
+      color: #90e0ef;  
+      margin-left: 8px;  
+    }  
 
-  </style>
-</head>
-<body>
-  <canvas id="gameCanvas" width="800" height="400"></canvas>
-  <div id="message">😡 You Died, Praying Gamer! 😂<br>Press Space to Retry</div>
-  <div id="scoreBoard">Score: 0 | Level: 1</div>  <script>
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    const message = document.getElementById('message');
-    const scoreBoard = document.getElementById('scoreBoard');
+    /* 3 Dots Menu */  
+    .menu {  
+      position: relative;  
+      display: inline-block;  
+    }  
+    .menu-icon {  
+      font-size: 24px;  
+      cursor: pointer;  
+      user-select: none;  
+      padding: 5px 10px;  
+      border-radius: 6px;  
+      transition: 0.3s;  
+    }  
+    .menu-icon:hover {  
+      background: rgba(255, 255, 255, 0.15);  
+    }  
 
-    let score = 0;
-    let level = 1;
-    let gameOver = false;
-    let scrollOffset = 0;
+    /* Dropdown Nav */  
+    .dropdown {  
+      display: none;  
+      position: absolute;  
+      right: 0;  
+      top: 35px;  
+      background: white;  
+      color: #0d1b2a;  
+      min-width: 180px;  
+      border-radius: 12px;  
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);  
+      overflow: hidden;  
+      z-index: 1000;  
+      animation: fadeIn 0.3s ease;  
+    }  
+    .dropdown a {  
+      display: block;  
+      padding: 12px 18px;  
+      text-decoration: none;  
+      color: #0d1b2a;  
+      transition: 0.3s;  
+    }  
+    .dropdown a:hover {  
+      background: #f1f5f9;  
+      padding-left: 25px;  
+    }  
+    .show {  
+      display: block;  
+    }  
 
-    const player = {
-      x: 100,
-      y: 300,
-      radius: 20,
-      color: 'yellow',
-      dy: 0,
-      gravity: 0.8,
-      jumpForce: -12,
-      grounded: false
-    };
+    @keyframes fadeIn {  
+      from {opacity: 0; transform: translateY(-10px);}  
+      to {opacity: 1; transform: translateY(0);}  
+    }  
 
-    let traps = [];
+    /* Section Style */  
+    section {  
+      padding: 60px 20px;  
+      max-width: 900px;  
+      margin: auto;  
+      text-align: center;  
+      opacity: 0;               /* hidden by default */  
+      transform: translateY(50px);  
+      transition: all 0.8s ease;  
+    }  
+    section.visible {  
+      opacity: 1;  
+      transform: translateY(0);  
+    }  
+    section h2 {  
+      font-size: 28px;  
+      margin-bottom: 20px;  
+      color: #0d1b2a;  
+      position: relative;  
+      display: inline-block;  
+    }  
+    section h2::after {  
+      content: "";  
+      display: block;  
+      width: 50px;  
+      height: 3px;  
+      background: #0d1b2a;  
+      margin: 8px auto;  
+      border-radius: 2px;  
+    }  
+    section p {  
+      font-size: 16px;  
+      line-height: 1.6;  
+      color: #333;  
+    }  
 
-    function createTrap(xOffset) {
-      const height = 30 + Math.random() * 50;
-      const trap = {
-        x: xOffset,
-        y: 400 - height,
-        width: 30,
-        height: height,
-        color: 'red'
-      };
-      traps.push(trap);
-    }
+    /* Skills */  
+    .skills-container {  
+      display: flex;  
+      flex-wrap: wrap;  
+      justify-content: center;  
+      gap: 20px;  
+    }  
+    .skill {  
+      background: white;  
+      border-radius: 12px;  
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);  
+      padding: 20px;  
+      width: 150px;  
+      transition: transform 0.3s;  
+    }  
+    .skill:hover {  
+      transform: scale(1.1);  
+    }  
+    .skill img {  
+      width: 50px;  
+      margin-bottom: 10px;  
+    }  
+    .skill h3 {  
+      font-size: 16px;  
+      margin: 0;  
+    }  
 
-    function resetGame() {
-      player.y = 300;
-      player.dy = 0;
-      traps = [];
-      scrollOffset = 0;
-      score = 0;
-      level = 1;
-      gameOver = false;
-      message.style.display = 'none';
-      for (let i = 600; i < 3000; i += Math.random() * 200 + 100) {
-        createTrap(i);
-      }
-      updateScoreBoard();
-    }
+    /* Projects */  
+    .projects {  
+      display: grid;  
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  
+      gap: 20px;  
+    }  
+    .project {  
+      background: white;  
+      border-radius: 12px;  
+      padding: 20px;  
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);  
+      transition: 0.3s;  
+    }  
+    .project:hover {  
+      transform: translateY(-5px);  
+    }  
 
-    function drawPlayer() {
-      ctx.beginPath();
-      ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
-      ctx.fillStyle = player.color;
-      ctx.fill();
-      ctx.closePath();
-    }
+    /* Achievements */  
+    .achievements ul {  
+      list-style: none;  
+      padding: 0;  
+    }  
+    .achievements li {  
+      background: white;  
+      padding: 15px;  
+      margin: 10px 0;  
+      border-radius: 10px;  
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);  
+      transition: 0.3s;  
+    }  
+    .achievements li:hover {  
+      transform: scale(1.05);  
+    }  
 
-    function drawTraps() {
-      traps.forEach((trap) => {
-        ctx.fillStyle = trap.color;
-        ctx.fillRect(trap.x - scrollOffset, trap.y, trap.width, trap.height);
-      });
-    }
+    /* Contact */  
+    .contact {  
+      background: #0d1b2a;  
+      color: white;  
+      border-radius: 12px;  
+      padding: 40px;  
+    }  
+    .contact p {  
+      font-size: 18px;  
+    }  
 
-    function checkCollision() {
-      for (let trap of traps) {
-        const trapX = trap.x - scrollOffset;
-        if (
-          player.x + player.radius > trapX &&
-          player.x - player.radius < trapX + trap.width &&
-          player.y + player.radius > trap.y
-        ) {
-          gameOver = true;
-          message.style.display = 'block';
-        }
-      }
-    }
+    footer {  
+      background: #0d1b2a;  
+      color: #aaa;  
+      text-align: center;  
+      padding: 15px;  
+      font-size: 14px;  
+    }  
+  </style>  
+</head>  
+<body>  
 
-    function updateScoreBoard() {
-      scoreBoard.innerText = `Score: ${score} | Level: ${level}`;
-    }
+  <!-- Header -->  
+  <header>  
+    <h1>JAGATHISH <span>(AI & DS)</span></h1>  
 
-    function update() {
-      if (gameOver) return;
+    <div class="menu">  
+      <div class="menu-icon" onclick="toggleDropdown()">⋮</div>  
+      <div class="dropdown" id="dropdownMenu">  
+        <a href="#objective">Objective</a>  
+        <a href="#skills">Skills</a>  
+        <a href="#projects">Projects</a>  
+        <a href="#achievements">Achievements</a>  
+        <a href="#activities">Activities</a>  
+        <a href="#contact">Contact</a>  
+      </div>  
+    </div>  
+  </header>  
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+  <!-- Sections -->  
+  <section id="objective">  
+    <h2>Objective</h2>  
+    <p>To leverage my skills in Artificial Intelligence & Data Science to create impactful solutions in technology, while continuously learning and innovating.</p>  
+  </section>  
 
-      // Gravity
-      player.dy += player.gravity;
-      player.y += player.dy;
+  <section id="skills">  
+    <h2>Skills</h2>  
+    <div class="skills-container">  
+      <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png"><h3>Python</h3></div>  
+      <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/919/919827.png"><h3>HTML</h3></div>  
+      <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/919/919826.png"><h3>CSS</h3></div>  
+      <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968292.png"><h3>JavaScript</h3></div>  
+      <div class="skill"><img src="https://cdn-icons-png.flaticon.com/512/2913/2913990.png"><h3>Machine Learning</h3></div>  
+    </div>  
+  </section>  
 
-      // Ground check
-      if (player.y + player.radius >= canvas.height) {
-        player.y = canvas.height - player.radius;
-        player.dy = 0;
-        player.grounded = true;
-      } else {
-        player.grounded = false;
-      }
+  <section id="projects">  
+    <h2>Projects</h2>  
+    <div class="projects">  
+      <div class="project"><h3>Instagram Sentiment Analyzer</h3><p>Analyzes captions & comments for emotions using AI.</p></div>  
+      <div class="project"><h3>YouTube Video Analyzer</h3><p>Performs sentiment & emotion detection on YouTube comments.</p></div>  
+      <div class="project"><h3>Student Dashboard</h3><p>A web app showing student details, results, and profiles.</p></div>  
+    </div>  
+  </section>  
 
-      scrollOffset += 4 + level * 0.3;
-      score += 1;
-      if (score % 500 === 0) {
-        level++;
-        for (let i = 0; i < 5; i++) {
-          createTrap(scrollOffset + Math.random() * 800);
-        }
-      }
+  <section id="achievements" class="achievements">  
+    <h2>Achievements</h2>  
+    <ul>  
+      <li>2nd Prize in AI Paper Presentation 2024</li>  
+      <li>Top 10 Finalist – Healthcare Hackathon 2025</li>  
+      <li>Completed Oracle Cloud Infrastructure Certification</li>  
+    </ul>  
+  </section>  
 
-      drawPlayer();
-      drawTraps();
-      checkCollision();
-      updateScoreBoard();
-    }
+  <section id="activities">  
+    <h2>Activities</h2>  
+    <p>Active participant in coding competitions, hackathons, and open-source contributions. Passionate about AI projects and teamwork.</p>  
+  </section>  
 
-    function gameLoop() {
-      update();
-      requestAnimationFrame(gameLoop);
-    }
+  <section id="contact" class="contact">  
+    <h2>Contact</h2>  
+    <p>📧 Email: jagathish@example.com</p>  
+    <p>📞 Phone: +91 9876543210</p>  
+    <p>🌐 GitHub: github.com/jagathish</p>  
+  </section>  
 
-    document.addEventListener('keydown', (e) => {
-      if (e.code === 'Space') {
-        if (gameOver) {
-          resetGame();
-        } else if (player.grounded) {
-          player.dy = player.jumpForce;
-        }
-      }
-    });
+  <footer>  
+    © 2025 Jagathish | Designed with ❤  
+  </footer>  
 
-    // Mobile Touch Support
-    document.addEventListener('touchstart', () => {
-      if (gameOver) {
-        resetGame();
-      } else if (player.grounded) {
-        player.dy = player.jumpForce;
-      }
-    });
+  <script>  
+    // Toggle dropdown  
+    function toggleDropdown() {  
+      document.getElementById("dropdownMenu").classList.toggle("show");  
+    }  
+    window.onclick = function(e) {  
+      if (!e.target.matches('.menu-icon')) {  
+        var dropdown = document.getElementById("dropdownMenu");  
+        if (dropdown.classList.contains('show')) {  
+          dropdown.classList.remove('show');  
+        }  
+      }  
+    }  
 
-    resetGame();
-    gameLoop();
-  </script></body>
+    // Scroll animations  
+    const sections = document.querySelectorAll("section");  
+    const observer = new IntersectionObserver(entries => {  
+      entries.forEach(entry => {  
+        if (entry.isIntersecting) {  
+          entry.target.classList.add("visible");  
+        }  
+      });  
+    }, { threshold: 0.2 });  
+
+    sections.forEach(section => {  
+      observer.observe(section);  
+    });  
+  </script>  
+</body>  
 </html>
